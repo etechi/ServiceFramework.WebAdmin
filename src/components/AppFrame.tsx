@@ -7,9 +7,10 @@ import * as  api  from "../webapi-all";
 import * as auth from "SF/utils/auth";
 import * as config from "../config";
 import { RouteProps } from "react-router";
+import * as PropTypes from 'prop-types';
 
 export interface AppFrameProps {
-    route?: RouteProps;
+    match?: RouteProps;
     children?: React.ReactNode;
 }
 interface state {
@@ -17,7 +18,7 @@ interface state {
 export default class AppFrame extends React.Component<AppFrameProps, state>
 {
     static contextTypes = {
-        //router: React.PropTypes.object.isRequired
+        router: PropTypes.object.isRequired
     };
     constructor(props: AppFrameProps,ctx:any) {
         super(props, ctx);
@@ -38,9 +39,9 @@ export default class AppFrame extends React.Component<AppFrameProps, state>
                 </WA.Header.Text> : null}
                 {u?<WA.Header.Button onClick={() => this.handleSignout() }><i className="icon-logout"></i></WA.Header.Button>:null}
             </WA.Header.Container>
-            {u ? <WA.SideBar.Container pathPrefix={this.props.route.path} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} >
+            {u ? <WA.SideBar.Container pathPrefix={this.props.match.path} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} curPath={this.props.match.path} >
                 {/*<WA.SideBar.SearchBox></WA.SideBar.SearchBox>*/}
-                <WA.SideBar.MenuItem icon='icon-home' name='首页' to={this.props.route.path + 'dashboard'} />
+                <WA.SideBar.MenuItem icon='icon-home' name='首页' to={this.props.match.path + 'dashboard'} isActive={false}/>
             </WA.SideBar.Container> : null}
             {/*<WA.Footer>footer</WA.Footer>*/}
             {this.props.children}

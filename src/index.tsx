@@ -20,7 +20,7 @@ var browserHistory=createBrowserHistory();
 api.setApiInvoker(apicall.apicall);
 
 declare var require: any;
-var env = (window as any)["ENV"] || {root:"/",type:"default"};
+var env = (window as any)["ENV"] || {root:"/",menu:"default"};
 
 function init(
     lib: ApiMeta.Library,
@@ -98,15 +98,14 @@ function init(
             //}
         ])}
     </Route>;
-
+   
     render(
-    <BrowserRouter>
+        <BrowserRouter>
     <div>
         {routes}
     </div>
     </BrowserRouter>
-
-    , document.getElementById('app'))
+    , document.getElementById('root'))
 
 }
 Promise.all([
