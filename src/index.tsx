@@ -20,7 +20,7 @@ var browserHistory=createBrowserHistory();
 api.setApiInvoker(apicall.apicall);
 
 declare var require: any;
-var env = (window as any)["ENV"] || {root:"/",menu:"default"};
+var env = (window as any)["ENV"] || {root:"",menu:"default"};
 
 function init(
     lib: ApiMeta.Library,
@@ -77,8 +77,8 @@ function init(
     ];
 
     const routes = 
-        <Route path={env.root}>
-            <AppFrame>
+        <Route render={({location})=>
+            <AppFrame location={location}>
             {/*<Route exact  onEnter={(nextState:any, transition:any) => {transition(env.root+'dashboard');}}/>*/}
             {chd_routes
             //.concat(config.ManagerBuildResult.entityRoutes)
@@ -99,11 +99,11 @@ function init(
             //}
         ])}
         </AppFrame>
-    </Route>
+        }/>
     ;
    
     render(
-        <BrowserRouter>
+        <BrowserRouter basename={env.root}>
         {routes}
     
     </BrowserRouter>

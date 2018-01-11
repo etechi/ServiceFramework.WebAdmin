@@ -6,11 +6,11 @@ import {Image} from "SF/components/utils/Image";
 import * as  api  from "../webapi-all";
 import * as auth from "SF/utils/auth";
 import * as config from "../config";
-import { RouteProps } from "react-router";
+import { Location } from "history";
 import * as PropTypes from 'prop-types';
 
 export interface AppFrameProps {
-    match?: RouteProps;
+    location?: Location;
     children?: React.ReactNode;
 }
 interface state {
@@ -28,7 +28,7 @@ export default class AppFrame extends React.Component<AppFrameProps, state>
     }
     render() {
         var u = {icon:"",nick:"xxx"};//auth.user();
-        var path="";//this.props.match.path
+        var path=this.props.location.pathname;
         return <WA.Application>
             
             <WA.Header.Container>
@@ -39,7 +39,7 @@ export default class AppFrame extends React.Component<AppFrameProps, state>
                 </WA.Header.Text> : null}
                 {u?<WA.Header.Button onClick={() => this.handleSignout() }><i className="icon-logout"></i></WA.Header.Button>:null}
             </WA.Header.Container>
-            {u ? <WA.SideBar.Container pathPrefix={path} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} curPath={path} >
+            {u ? <WA.SideBar.Container pathPrefix={"/"} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} curPath={path} >
                 {/*<WA.SideBar.SearchBox></WA.SideBar.SearchBox>*/}
                 <WA.SideBar.MenuItem icon='icon-home' name='首页' to={path + 'dashboard'} isActive={false}/>
             </WA.SideBar.Container> : null}
