@@ -72,12 +72,13 @@ function init(
     //var store = createStore(reducers);
 
     const chd_routes = [
-        <Route path="dashboard" component={Dashboard}/>,
-        <Route path="signin" component={SigninPage}/>
+        <Route key="dashboard" path="dashboard" component={Dashboard}/>,
+        <Route key="signin" path="signin" component={SigninPage}/>
     ];
 
     const routes = 
-        <Route path={env.root} component={AppFrame}>
+        <Route path={env.root}>
+            <AppFrame>
             {/*<Route exact  onEnter={(nextState:any, transition:any) => {transition(env.root+'dashboard');}}/>*/}
             {chd_routes
             //.concat(config.ManagerBuildResult.entityRoutes)
@@ -97,13 +98,14 @@ function init(
             //    }
             //}
         ])}
-    </Route>;
+        </AppFrame>
+    </Route>
+    ;
    
     render(
         <BrowserRouter>
-    <div>
         {routes}
-    </div>
+    
     </BrowserRouter>
     , document.getElementById('root'))
 

@@ -17,9 +17,7 @@ interface state {
 }
 export default class AppFrame extends React.Component<AppFrameProps, state>
 {
-    static contextTypes = {
-        router: PropTypes.object.isRequired
-    };
+
     constructor(props: AppFrameProps,ctx:any) {
         super(props, ctx);
     }
@@ -30,7 +28,9 @@ export default class AppFrame extends React.Component<AppFrameProps, state>
     }
     render() {
         var u = {icon:"",nick:"xxx"};//auth.user();
+        var path="";//this.props.match.path
         return <WA.Application>
+            
             <WA.Header.Container>
                 <WA.Header.Logo>系统管理中心</WA.Header.Logo>
                 {u ? <WA.Header.Text to={"/admin/" + encodeURIComponent("系统安全") + "/AdminInfo"}>
@@ -39,9 +39,9 @@ export default class AppFrame extends React.Component<AppFrameProps, state>
                 </WA.Header.Text> : null}
                 {u?<WA.Header.Button onClick={() => this.handleSignout() }><i className="icon-logout"></i></WA.Header.Button>:null}
             </WA.Header.Container>
-            {u ? <WA.SideBar.Container pathPrefix={this.props.match.path} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} curPath={this.props.match.path} >
+            {u ? <WA.SideBar.Container pathPrefix={path} menuCategories={config.ManagerBuildResult.menus/* modules.map(m => m.menu) */} curPath={path} >
                 {/*<WA.SideBar.SearchBox></WA.SideBar.SearchBox>*/}
-                <WA.SideBar.MenuItem icon='icon-home' name='首页' to={this.props.match.path + 'dashboard'} isActive={false}/>
+                <WA.SideBar.MenuItem icon='icon-home' name='首页' to={path + 'dashboard'} isActive={false}/>
             </WA.SideBar.Container> : null}
             {/*<WA.Footer>footer</WA.Footer>*/}
             {this.props.children}
