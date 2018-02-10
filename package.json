@@ -2,7 +2,7 @@
   "name": "sfadmin",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://101.132.131.224:13001",
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/es6-promise": "^3.3.0",
