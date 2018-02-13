@@ -1,5 +1,4 @@
 {
-    "disabled":true,
     "extends": ["tslint-react"],
     "rules": {
         "align": [
