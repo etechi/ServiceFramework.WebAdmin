@@ -6,7 +6,7 @@ function itemNormalize(items: any[]): any[] {
     var re: any[] = [];
     var l2: any[] = [];
     items.forEach(i => {
-        if (i.Children[0].Children)
+        if (i.Children[0].Children && i.Children[0].Children.length)
             re.push(i);
         else
             l2.push(i);
